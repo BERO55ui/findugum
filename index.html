@@ -2,13 +2,14 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Finduğum 💙</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finduğum 💗</title>
 
 <style>
 body{
   margin:0;
   height:100vh;
-  background:radial-gradient(circle at top,#1b2b52,#05070f);
+  background:radial-gradient(circle at top,#1b2b52,#03040a);
   overflow:hidden;
   font-family:'Segoe UI',sans-serif;
   color:white;
@@ -18,38 +19,39 @@ body{
 #lock{
   position:fixed;
   inset:0;
-  background:#05070f;
+  background:#03040a;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
-  z-index:10;
+  justify-content:center;
   text-align:center;
+  z-index:20;
 }
+#lock h2{padding:0 20px;}
 #lock input{
-  padding:12px;
-  border-radius:10px;
+  padding:14px;
+  border-radius:12px;
   border:none;
   margin-top:15px;
   font-size:16px;
 }
 #lock button{
   margin-top:10px;
-  padding:10px 25px;
+  padding:12px 30px;
   border:none;
-  border-radius:10px;
+  border-radius:12px;
   background:#ff5c8a;
   color:white;
-  font-size:16px;
+  font-size:17px;
 }
 
 /* 🌙 AY */
 .moon{
   position:fixed;
-  top:40px;
-  right:60px;
-  width:120px;
-  height:120px;
+  top:30px;
+  right:30px;
+  width:100px;
+  height:100px;
   background:#fffbd5;
   border-radius:50%;
   box-shadow:0 0 120px #fff;
@@ -59,67 +61,73 @@ body{
 .container{
   text-align:center;
   margin-top:140px;
-  z-index:2;
   position:relative;
+  z-index:2;
+  padding:0 15px;
 }
 
 h1{
-  font-size:44px;
+  font-size:42px;
   animation:glow 2s infinite alternate;
 }
 @keyframes glow{
   from{text-shadow:0 0 15px #ff9dbb;}
-  to{text-shadow:0 0 35px #ff5c8a;}
+  to{text-shadow:0 0 45px #ff5c8a;}
 }
 
 /* FOTOĞRAFLAR */
 .slider{
   display:flex;
-  justify-content:center;
-  gap:25px;
-  margin:40px auto 30px auto;
+  overflow-x:auto;
+  gap:20px;
+  margin:40px 0 30px;
+  padding-bottom:10px;
 }
 .slider img{
-  width:230px;
-  height:230px;
+  width:220px;
+  height:220px;
+  border-radius:24px;
   object-fit:cover;
-  border-radius:22px;
-  box-shadow:0 0 30px rgba(255,120,170,0.7);
+  box-shadow:0 0 35px rgba(255,120,170,0.8);
+  flex-shrink:0;
 }
 
 /* ŞİİR */
 .poem{
   font-size:18px;
   line-height:1.7;
-  margin-top:20px;
   opacity:0.9;
 }
 
 /* 🩷 KALPLER */
 .heart{
   position:absolute;
-  font-size:24px;
+  font-size:34px;
   color:#ff5c8a;
-  animation:float 8s linear infinite;
+  animation:float 9s linear infinite;
   cursor:pointer;
+  z-index:10;
+  user-select:none;
 }
+
 @keyframes float{
-  from{transform:translateY(100vh);opacity:0;}
-  to{transform:translateY(-10vh);opacity:1;}
+  from{transform:translateY(110vh) scale(0.8);opacity:0;}
+  to{transform:translateY(-10vh) scale(1.1);opacity:1;}
 }
 
 /* 💬 MESAJ */
 #message{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.9);
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(6px);
   display:none;
   align-items:center;
   justify-content:center;
   text-align:center;
-  font-size:30px;
+  font-size:28px;
   padding:30px;
-  z-index:5;
+  z-index:15;
 }
 </style>
 </head>
@@ -136,7 +144,7 @@ h1{
 <div class="moon"></div>
 
 <div class="container">
-  <h1>Finduğum 💙</h1>
+  <h1>Finduğum 💗</h1>
 
   <div class="slider">
     <img src="foto1.jpg.jpeg">
@@ -147,8 +155,8 @@ h1{
   <div class="poem">
     Karanlığımda doğan ışığımsın,<br>
     gecemin ayı, kalbimin sebebisin.<br>
-    Ne zaman kaybolsam,<br>
-    adın yol olur bana.
+    Her dokunuşunda biraz daha<br>
+    sana aşık oluyorum.
   </div>
 </div>
 
@@ -167,7 +175,7 @@ const music=document.getElementById("music");
 
 function unlock(){
   const c=document.getElementById("pass").value.trim().toLowerCase();
-  if(c==="finduk" || c==="fınduk"){
+  if(c==="finduk"||c==="fınduk"){
     document.getElementById("lock").style.display="none";
     spawnHearts();
   }else{
@@ -175,21 +183,27 @@ function unlock(){
   }
 }
 
+function showLove(){
+  msg.style.display="flex";
+  music.play();
+  if(navigator.vibrate) navigator.vibrate(120);
+  setTimeout(()=>msg.style.display="none",3500);
+}
+
 function spawnHearts(){
   setInterval(()=>{
     const h=document.createElement("div");
     h.className="heart";
     h.innerHTML="💗";
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=6+Math.random()*4+"s";
-    h.onclick=()=>{
-      msg.style.display="flex";
-      music.play();
-      setTimeout(()=>msg.style.display="none",3500);
-    };
+    h.style.left=Math.random()*90+"vw";
+    h.style.animationDuration=7+Math.random()*4+"s";
+
+    h.addEventListener("click",showLove);
+    h.addEventListener("touchstart",showLove);
+
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),10000);
-  },450);
+    setTimeout(()=>h.remove(),11000);
+  },400);
 }
 </script>
 
