@@ -2,183 +2,201 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Seni Çok Seviyorum Finduğum</title>
+<title>Finduğum 💙</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI', sans-serif;
-}
-
 body{
-  min-height:100vh;
-  background: linear-gradient(120deg,#ff9a9e,#fad0c4);
+  margin:0;
+  height:100vh;
+  background:radial-gradient(circle at top,#1b2b52,#05070f);
   overflow:hidden;
+  font-family:'Segoe UI',sans-serif;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* Kalpler */
-.heart{
-  position:absolute;
-  width:20px;
-  height:20px;
-  background:red;
-  transform:rotate(45deg);
-  animation:float 8s linear infinite;
-  opacity:0.8;
-  cursor:pointer;
-}
-
-.heart::before,
-.heart::after{
-  content:'';
-  position:absolute;
-  width:20px;
-  height:20px;
-  background:red;
-  border-radius:50%;
-}
-
-.heart::before{ top:-10px; left:0; }
-.heart::after{ left:-10px; top:0; }
-
-@keyframes float{
-  0%{ transform:translateY(100vh) rotate(45deg); opacity:0; }
-  10%{opacity:0.8;}
-  100%{ transform:translateY(-10vh) rotate(45deg); opacity:0; }
-}
-
-/* İçerik */
-.container{
-  position:relative;
-  z-index:5;
-  min-height:100vh;
+/* KİLİT */
+#lock{
+  position:fixed;
+  inset:0;
+  background:#05070f;
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  z-index:10;
   text-align:center;
-  padding:20px;
+}
+
+#lock input{
+  padding:12px;
+  font-size:16px;
+  border-radius:10px;
+  border:none;
+  margin-top:15px;
+}
+
+#lock button{
+  margin-top:10px;
+  padding:10px 25px;
+  border:none;
+  border-radius:10px;
+  background:#ff4d6d;
+  color:white;
+  font-size:16px;
+}
+
+/* AY */
+.moon{
+  position:absolute;
+  top:40px;
+  right:60px;
+  width:130px;
+  height:130px;
+  background:#f5f3ce;
+  border-radius:50%;
+  box-shadow:0 0 80px #fff;
+}
+
+/* ANA */
+.container{
+  text-align:center;
+  z-index:2;
 }
 
 h1{
-  font-size:3rem;
-  color:white;
-  margin-bottom:30px;
-  text-shadow:0 0 15px rgba(0,0,0,0.3);
+  font-size:42px;
+  animation:glow 2s infinite alternate;
 }
 
-.poems{
-  max-width:800px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+@keyframes glow{
+  from{text-shadow:0 0 10px #ffb3c1;}
+  to{text-shadow:0 0 35px #ff4d6d;}
 }
 
-.poem{
-  background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(8px);
-  padding:20px;
-  border-radius:15px;
-  color:white;
+/* FOTOĞRAFLAR */
+.slider{
+  display:flex;
+  overflow-x:auto;
+  gap:25px;
+  margin:35px 0;
+  padding-bottom:10px;
 }
 
-/* Popup */
-.popup{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:white;
-  padding:25px 30px;
-  border-radius:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.3);
-  display:none;
-  z-index:999;
-  text-align:center;
+.slider img{
+  width:230px;
+  height:230px;
+  border-radius:25px;
+  object-fit:cover;
+  box-shadow:0 0 30px rgba(255,105,135,0.7);
+  transition:0.4s;
+}
+.slider img:hover{
+  transform:scale(1.05);
 }
 
-.popup h2{
-  color:#ff4d6d;
-  margin-bottom:10px;
-}
-
-.popup p{
-  font-size:1.1rem;
-  font-weight:600;
-}
-
-.popup button{
-  margin-top:15px;
-  padding:8px 18px;
-  border:none;
-  border-radius:20px;
-  background:#ff4d6d;
-  color:white;
+/* KALPLER */
+.heart{
+  position:absolute;
+  font-size:26px;
+  animation:float 7s linear infinite;
   cursor:pointer;
 }
 
-@media(max-width:600px){
-  h1{font-size:2.2rem;}
+@keyframes float{
+  from{transform:translateY(100vh);opacity:1;}
+  to{transform:translateY(-10vh);opacity:0;}
+}
+
+/* MESAJ */
+#message{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-size:30px;
+  padding:20px;
+  animation:fade 1s;
+}
+
+@keyframes fade{
+  from{opacity:0;}
+  to{opacity:1;}
 }
 </style>
 </head>
+
 <body>
 
-<!-- Fon Müziği -->
+<!-- KİLİT -->
+<div id="lock">
+  <h2>🔒 BERAT'IN SANA ÇOK SEVEREK ETTİĞİ İLTİFAT KELİMESİ NEDİR?</h2>
+  <input id="pass" placeholder="Cevap">
+  <button onclick="unlock()">GİR</button>
+</div>
+
+<div class="moon"></div>
+
+<div class="container">
+  <h1>Finduğum 💙</h1>
+
+  <div class="slider">
+    <img src="foto1.jpg.jpeg">
+    <img src="foto2.jpg.jpeg">
+    <img src="foto3.jpg.jpeg">
+  </div>
+
+  <p>
+    Karanlığımda doğan ışığımsın,<br>
+    gecemin ayı, kalbimin sebebisin.
+  </p>
+</div>
+
+<div id="message">
+  🌙 SİYAH GÖKYÜZÜMÜ AYDINLATAN AYIŞIĞIMSIN 💫
+</div>
+
 <audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_8b9c33c12f.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9b94c73db6.mp3">
 </audio>
 
 <script>
-const music=document.getElementById("music");
+function unlock(){
+  const c=document.getElementById("pass").value.trim().toLowerCase();
+  if(c==="finduk"||c==="fınduk"){
+    document.getElementById("lock").style.display="none";
+    spawnHearts();
+  }else{
+    alert("Yanlış cevap 💔");
+  }
+}
 
-for(let i=0;i<35;i++){
-  let heart=document.createElement("div");
-  heart.className="heart";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=5+Math.random()*5+"s";
-  let size=10+Math.random()*20;
-  heart.style.width=size+"px";
-  heart.style.height=size+"px";
-  heart.style.background=`hsl(${Math.random()*360},80%,60%)`;
+function spawnHearts(){
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💙";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=5+Math.random()*4+"s";
+    h.onclick=showMessage;
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),9000);
+  },350);
+}
 
-  heart.onclick=()=>{
-    document.getElementById("popup").style.display="block";
-    music.play();
-  };
-
-  document.body.appendChild(heart);
+function showMessage(){
+  document.getElementById("message").style.display="flex";
+  document.getElementById("music").play();
+  setTimeout(()=>{
+    document.getElementById("message").style.display="none";
+  },3500);
 }
 </script>
-
-<div class="container">
-  <h1>💖 Seni Çok Seviyorum Finduğum 💖</h1>
-
-  <div class="poems">
-    <div class="poem">
-      Karanlığımda doğan ışık sensin,<br>
-      Geceme anlam katan ay gibi.<br>
-      Kalbim seni her attığında,<br>
-      Dünya biraz daha güzel.
-    </div>
-
-    <div class="poem">
-      Ne zaman kaybolsam,<br>
-      Adın yolumu bulur.<br>
-      Çünkü sen,<br>
-      Siyah gökyüzümdeki ayışıksın.
-    </div>
-  </div>
-</div>
-
-<!-- Popup -->
-<div class="popup" id="popup">
-  <h2>💌</h2>
-  <p>SİYAH GÖKYÜZÜMÜ AYDINLATAN AYIŞIĞIMSIN</p>
-  <button onclick="document.getElementById('popup').style.display='none'">Tamam</button>
-</div>
 
 </body>
 </html>
