@@ -8,106 +8,78 @@
 body{
   margin:0;
   height:100vh;
-  background:radial-gradient(circle at top,#1b2b52,#05070f);
+  background:radial-gradient(circle at top,#1c2f6b,#02030a);
   overflow:hidden;
   font-family:'Segoe UI',sans-serif;
   color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* KİLİT */
-#lock{
-  position:fixed;
-  inset:0;
-  background:#05070f;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:10;
-  text-align:center;
-}
-
-#lock input{
-  padding:12px;
-  font-size:16px;
-  border-radius:10px;
-  border:none;
-  margin-top:15px;
-}
-
-#lock button{
-  margin-top:10px;
-  padding:10px 25px;
-  border:none;
-  border-radius:10px;
-  background:#ff4d6d;
-  color:white;
-  font-size:16px;
 }
 
 /* AY */
 .moon{
-  position:absolute;
+  position:fixed;
   top:40px;
   right:60px;
-  width:130px;
-  height:130px;
-  background:#f5f3ce;
+  width:120px;
+  height:120px;
+  background:#fffbd5;
   border-radius:50%;
-  box-shadow:0 0 80px #fff;
+  box-shadow:0 0 120px #fff;
 }
 
-/* ANA */
+/* ANA ALAN */
 .container{
-  text-align:center;
+  position:relative;
   z-index:2;
+  text-align:center;
+  margin-top:120px;
 }
 
 h1{
-  font-size:42px;
+  font-size:44px;
+  text-shadow:0 0 25px #7aa2ff;
   animation:glow 2s infinite alternate;
 }
 
 @keyframes glow{
-  from{text-shadow:0 0 10px #ffb3c1;}
-  to{text-shadow:0 0 35px #ff4d6d;}
+  from{text-shadow:0 0 15px #7aa2ff;}
+  to{text-shadow:0 0 40px #b3c7ff;}
 }
 
 /* FOTOĞRAFLAR */
 .slider{
   display:flex;
-  overflow-x:auto;
+  justify-content:center;
   gap:25px;
-  margin:35px 0;
-  padding-bottom:10px;
+  margin:40px auto;
 }
 
 .slider img{
   width:230px;
   height:230px;
-  border-radius:25px;
   object-fit:cover;
-  box-shadow:0 0 30px rgba(255,105,135,0.7);
-  transition:0.4s;
+  border-radius:22px;
+  box-shadow:0 0 35px rgba(120,160,255,0.8);
 }
-.slider img:hover{
-  transform:scale(1.05);
+
+/* ŞİİR */
+.poem{
+  font-size:18px;
+  line-height:1.6;
+  opacity:0.9;
 }
 
 /* KALPLER */
 .heart{
   position:absolute;
-  font-size:26px;
-  animation:float 7s linear infinite;
+  font-size:22px;
+  color:#7aa2ff;
+  animation:float 8s linear infinite;
   cursor:pointer;
 }
 
 @keyframes float{
-  from{transform:translateY(100vh);opacity:1;}
-  to{transform:translateY(-10vh);opacity:0;}
+  from{transform:translateY(100vh);opacity:0;}
+  to{transform:translateY(-10vh);opacity:1;}
 }
 
 /* MESAJ */
@@ -119,26 +91,14 @@ h1{
   align-items:center;
   justify-content:center;
   text-align:center;
-  font-size:30px;
-  padding:20px;
-  animation:fade 1s;
-}
-
-@keyframes fade{
-  from{opacity:0;}
-  to{opacity:1;}
+  font-size:32px;
+  padding:30px;
+  z-index:5;
 }
 </style>
 </head>
 
 <body>
-
-<!-- KİLİT -->
-<div id="lock">
-  <h2>🔒 BERAT'IN SANA ÇOK SEVEREK ETTİĞİ İLTİFAT KELİMESİ NEDİR?</h2>
-  <input id="pass" placeholder="Cevap">
-  <button onclick="unlock()">GİR</button>
-</div>
 
 <div class="moon"></div>
 
@@ -151,30 +111,26 @@ h1{
     <img src="foto3.jpg.jpeg">
   </div>
 
-  <p>
+  <div class="poem">
     Karanlığımda doğan ışığımsın,<br>
-    gecemin ayı, kalbimin sebebisin.
-  </p>
+    gecemin ayı, kalbimin sebebisin.<br>
+    Ne zaman kaybolsam,<br>
+    adın yolu bulur bana.
+  </div>
 </div>
 
 <div id="message">
-  🌙 SİYAH GÖKYÜZÜMÜ AYDINLATAN AYIŞIĞIMSIN 💫
+  🌙<br>
+  SİYAH GÖKYÜZÜMÜ AYDINLATAN AYIŞIĞIMSIN 💫
 </div>
 
-<audio id="music" loop>
+<audio id="music">
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9b94c73db6.mp3">
 </audio>
 
 <script>
-function unlock(){
-  const c=document.getElementById("pass").value.trim().toLowerCase();
-  if(c==="finduk"||c==="fınduk"){
-    document.getElementById("lock").style.display="none";
-    spawnHearts();
-  }else{
-    alert("Yanlış cevap 💔");
-  }
-}
+const msg=document.getElementById("message");
+const music=document.getElementById("music");
 
 function spawnHearts(){
   setInterval(()=>{
@@ -182,20 +138,17 @@ function spawnHearts(){
     h.className="heart";
     h.innerHTML="💙";
     h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=5+Math.random()*4+"s";
-    h.onclick=showMessage;
+    h.style.animationDuration=6+Math.random()*4+"s";
+    h.onclick=()=>{
+      msg.style.display="flex";
+      music.play();
+      setTimeout(()=>msg.style.display="none",3500);
+    };
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),9000);
-  },350);
+    setTimeout(()=>h.remove(),10000);
+  },450);
 }
-
-function showMessage(){
-  document.getElementById("message").style.display="flex";
-  document.getElementById("music").play();
-  setTimeout(()=>{
-    document.getElementById("message").style.display="none";
-  },3500);
-}
+spawnHearts();
 </script>
 
 </body>
