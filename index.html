@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Seni Çok Seviyorum Finduğum</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background: linear-gradient(120deg,#ff9a9e,#fad0c4);
+  overflow:hidden;
+}
+
+/* Kalpler */
+.heart{
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:red;
+  transform:rotate(45deg);
+  animation:float 8s linear infinite;
+  opacity:0.8;
+  cursor:pointer;
+}
+
+.heart::before,
+.heart::after{
+  content:'';
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:red;
+  border-radius:50%;
+}
+
+.heart::before{ top:-10px; left:0; }
+.heart::after{ left:-10px; top:0; }
+
+@keyframes float{
+  0%{ transform:translateY(100vh) rotate(45deg); opacity:0; }
+  10%{opacity:0.8;}
+  100%{ transform:translateY(-10vh) rotate(45deg); opacity:0; }
+}
+
+/* İçerik */
+.container{
+  position:relative;
+  z-index:5;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+h1{
+  font-size:3rem;
+  color:white;
+  margin-bottom:30px;
+  text-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+.poems{
+  max-width:800px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.poem{
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(8px);
+  padding:20px;
+  border-radius:15px;
+  color:white;
+}
+
+/* Popup */
+.popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  padding:25px 30px;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.3);
+  display:none;
+  z-index:999;
+  text-align:center;
+}
+
+.popup h2{
+  color:#ff4d6d;
+  margin-bottom:10px;
+}
+
+.popup p{
+  font-size:1.1rem;
+  font-weight:600;
+}
+
+.popup button{
+  margin-top:15px;
+  padding:8px 18px;
+  border:none;
+  border-radius:20px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+}
+
+@media(max-width:600px){
+  h1{font-size:2.2rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- Fon Müziği -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_8b9c33c12f.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const music=document.getElementById("music");
+
+for(let i=0;i<35;i++){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=5+Math.random()*5+"s";
+  let size=10+Math.random()*20;
+  heart.style.width=size+"px";
+  heart.style.height=size+"px";
+  heart.style.background=`hsl(${Math.random()*360},80%,60%)`;
+
+  heart.onclick=()=>{
+    document.getElementById("popup").style.display="block";
+    music.play();
+  };
+
+  document.body.appendChild(heart);
+}
+</script>
+
+<div class="container">
+  <h1>💖 Seni Çok Seviyorum Finduğum 💖</h1>
+
+  <div class="poems">
+    <div class="poem">
+      Karanlığımda doğan ışık sensin,<br>
+      Geceme anlam katan ay gibi.<br>
+      Kalbim seni her attığında,<br>
+      Dünya biraz daha güzel.
+    </div>
+
+    <div class="poem">
+      Ne zaman kaybolsam,<br>
+      Adın yolumu bulur.<br>
+      Çünkü sen,<br>
+      Siyah gökyüzümdeki ayışıksın.
+    </div>
+  </div>
+</div>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <h2>💌</h2>
+  <p>SİYAH GÖKYÜZÜMÜ AYDINLATAN AYIŞIĞIMSIN</p>
+  <button onclick="document.getElementById('popup').style.display='none'">Tamam</button>
+</div>
+
+</body>
+</html>
